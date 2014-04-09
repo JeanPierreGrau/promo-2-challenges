@@ -25,12 +25,7 @@ end
 def sum_recursive(min,max)
   #TODO (optional): return the sum of the integers between min and max
   #CONSTRAINT: you should use a recursive algorithm, i.e. the method should call itself
-sum = 0
-sum_recursive.each do
-  sum += i
-  i += 1
 
-  return sum
 end
 
 
