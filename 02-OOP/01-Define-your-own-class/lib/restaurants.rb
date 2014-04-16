@@ -31,3 +31,4 @@ place = Restaurants.new("italian", "french", "asian", "american", "mexican")
 puts place.fast_food
 puts place.spicy_food
 puts place.gourmet_food
+puts "hello"
