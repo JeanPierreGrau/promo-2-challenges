@@ -1,6 +1,8 @@
-class Restaurants
+class Restaurant
 
-  def initialize(italian, french, chinese, american, mexican)
+  attr_accessor :asian
+
+  def initialize(italian, french, asian, american, mexican)
     @italian = italian
     @french = french
     @asian = asian
@@ -20,7 +22,9 @@ class Restaurants
     "The gourmet food: #{@italian} #{@french}"
   end
 
-attr_accessor :asian
+end
 
-place = Restaurants.new("chinese", "thai", "korean")
-puts a.asian
+place = Restaurant.new("italian", "french", "asian", "american", "mexican")
+
+puts place.asian
+
