@@ -4,6 +4,8 @@ end
 
 class BankAccount
 
+attr_reader :name, :position
+attr_accessor :transactions
   # Contract for the BankAccount class
   # - you can access full owner's name and position, but partial IBAN
   # - you cannot access full IBAN
@@ -25,25 +27,39 @@ class BankAccount
   end
 
   def withdraw(amount)
-    # TODO: Call add_transaction with the right argument
-    # TODO: returns a string with a message
+    @position -= amount  # TODO: add Call add_transaction with the right argument
+    @transactions << (-amount)
+    puts "Your withdraw is #{amount}. Your current position is #{@position}!"  # TODO: returns a string with a message
   end
 
   def deposit(amount)
-    # TODO: Call add_transaction with the right argument
-    # TODO: returns a string with a message
+    @position += amount # TODO: Call add_transaction with the right argument
+    @transactions << (amount)
+    puts "Your deposit is #{amount}. Your current position is #{@position}!"   # TODO: returns a string with a message
   end
 
   def transactions_history(args = {})
     # TODO: Check if there is a password and if so if it is correct
     # TODO: return a string displaying the transactions, BUT NOT return the transaction array !
+    if args[:password]
+      if args[:password] == @password
+         @transactions.each {|transaction| "#{transaction}"}.join(",")
+        else
+         "wrong password"
+      end
+    else
+       "no password given"
+    end
   end
 
   def iban
-    # TODO: Hide the middle of the IBAN like FR14**************606 and return it
+    new_iban = @iban[0,3] + "***********************" + @iban[-3, -1]      # TODO: Hide the middle of the IBAN like FR14**************606 and return it
   end
 
   def to_s
+    "Owner: #{@name}
+    IBAN: #{@iban}
+    Current amount: #{@position} euros"
     # Method used when printing account object as string (also used for string interpolation)
     # TODO: Displays the account owner, the hidden iban and the position of the account
   end
@@ -51,8 +67,10 @@ class BankAccount
   private
 
   def add_transaction(amount)
-    # TODO: add the amount in the transactions array
-    # TODO: update the current position (which represents the balance of the account)
+    @transactions << amount    # TODO: add the amount in the transactions array
+    @position += amount   # TODO: update the current position (which represents the balance of the account)
   end
 
 end
+
+
