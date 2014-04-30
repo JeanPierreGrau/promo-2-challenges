@@ -7,7 +7,8 @@
 # }
 
 class Order
-    attr_accessor :delivery_guy, :statut
+
+attr_accessor :delivery_guy, :statut
 
     def initialize(customer)
         @statut = "pending"
@@ -17,21 +18,23 @@ class Order
     end
 
     def to_s
-        "client: #{@customer}; #{delivery_guy}; statut : #{@statut}; order : #{@meals}"
+        "Client: #{@customer}; Delivery: #{delivery_guy}; Statut: #{@statut}; Order: #{@meals}"
     end
 
     def add_meals
 
-        @meals = []
+        @meals = {}
         answer = nil
 
         until answer == ""
-            puts "Please enter your meal"
+            puts "Menu #{MEALS}"
+            puts "Please enter your meal or press 'Enter'"
             answer = gets.chomp
             unless answer == ""
                 raise "we don't have this meal" if (MEALS.has_key? answer.to_sym) == false
-                @meals << answer.to_sym
+                @meals[answer.to_sym] = MEALS[answer.to_sym]
             end
+
         end
     end
 

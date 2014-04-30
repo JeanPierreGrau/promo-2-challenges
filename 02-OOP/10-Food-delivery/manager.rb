@@ -5,8 +5,8 @@ require_relative 'order'
 
 class Manager
 
-    attr_accessor :restaurant
-    attr_reader :password, :name
+attr_accessor :restaurant
+attr_reader :password, :name
 
     def initialize(name, password)
         @name = name
@@ -17,6 +17,7 @@ class Manager
     def add_employee(name, password)
         employee = Employee.new(name, password)
         restaurant.employees << employee
+        restaurant.staff << employee
         employee
     end
 
@@ -24,17 +25,12 @@ class Manager
         new_order = Order.new(customer)
         new_order.delivery_guy = restaurant.employees.sample
         restaurant.orders << new_order
-
     end
 
     def add_customer(name, address, phone)
         customer = Customer.new(name, address, phone)
         restaurant.customers << customer
         customer
-    end
-
-    def id_array
-        [@name, @password]
     end
 
     def to_s

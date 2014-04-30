@@ -1,3 +1,6 @@
+require_relative 'cookbook'
+require_relative 'controller'
+
 class UI
 
   TASKS = {
@@ -13,35 +16,37 @@ class UI
   end
 
   def list
-    # TODO: call the appropriate controller method with the proper argument(s)
-    # TODO: format and display the retrieved data in a numbered list
-    controller.list
+    puts "Your recipes : "
+    @controller.list.each_with_index do |recipe, index|
+      puts "#{index + 1} : #{recipe_name} (#{recipe.prep_time} min)"
   end
 
   def add
-    # TODO: ask the user a recipe name
-    # TODO: call the appropriate controller method with the proper argument(s)
-    p "What recipe do you want to delete?"
-    controller.add(user_input)
+    puts "Enter the name of your recipe"
+    name = gets.chomp
+
+    puts "Enter the rating of your recipe"
+    name = gets.chomp.to_i
+
+    puts "Enter the cook time of your recipe"
+    name = gets.chomp.to_i
+
+    puts "Enter the prep_time of your recipe"
+    name = gets.chomp.to_i
+
+    @controller.add(user_input)
   end
 
   def del
-    # TODO: ask the user a recipe index
-    # TODO: call the appropriate controller method with the proper argument(s)
     p "What recipe do you want to add?"
-    controller.delete(user_input)
+    @controller.delete(user_input)
   end
 
   def exit
-    # TODO: exit the program
-    # Hint: Take a look at the display method !
     @running = false
   end
 
   def user_input
-    # TODO: Get the user input and return it
-    # [OPTIONAL] You can think of the case where the user
-    # enters a wrong choice.
   user_answer = gets.chomp
   end
 
@@ -58,23 +63,10 @@ class UI
     end
   end
 
-  ###
-  ##  You don't need to modify the following methods !
-  ###
   def display_tasks
     puts "What do you want to do? \n"
     puts TASKS.values
   end
-
-  # The dispatch method takes a String or a Symbol as an argument
-  # and calls the method with the same name.
-  #
-  #  Examples:
-  #
-  #   dispatch(:del) => Will call the `del` method in the current class
-  #   dispatch("add") => Will call the `add` method in the current class
-  #
-  # To understand this, read the doc : http://ruby-doc.org/core-2.1.1/Object.html#method-i-send
 
   def dispatch(task)
     self.send(task.to_sym)

@@ -1,13 +1,13 @@
 class UI_Manager
 
     MANAGER_TASKS = {
-        list:       "1° List customers[list]",
-        customer:   "2° Add customer [customer]",
-        view:       "3° View orders [view]",
-        order:      "4° New order [order]",
-        employees:  "5° List employees [employees]",
-        remove:     "6° Remove order [remove]",
-        exit:       "7° Log out [exit]"
+        list:       "1. List customers[list]",
+        customer:   "2. Add customer [customer]",
+        view:       "3. View orders [view]",
+        order:      "4. New order [order]",
+        employees:  "5. List employees [employees]",
+        cancel:     "6. Cancel order [cancel]",
+        exit:       "7. Log out [exit]"
          }
 
     def initialize(restaurant, manager)
@@ -46,12 +46,14 @@ class UI_Manager
 
     def view
         @restaurant.orders.each_with_index do |order, i|
-            puts "Order n°#{i+1} : #{order.to_s}"
+        puts "Order n°#{i+1} : #{order.to_s}"
         end
     end
 
     def remove
-
+        puts "which order do you want to cancel?"
+        index = gets.chomp.to_i
+        @restaurant.orders = @restaurant.orders.delete_at(index-1)
     end
 
     def exit
@@ -74,6 +76,5 @@ class UI_Manager
     def dispatch(task)
         self.send(task.to_sym)
     end
-
 
 end
